@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATS+ Admin | Dashboard</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .sidebar-dark { background-color: #222d32; }
+        .sidebar-user-panel { background: rgba(0,0,0,0.1); border-bottom: 1px solid #4b646f; }
+        .nav-active { border-left: 3px solid #3c8dbc; background: #1e282c; color: #fff !important; }
+        .bg-aqua { background-color: #00c0ef !important; }
+        .bg-green { background-color: #00a65a !important; }
+        .bg-yellow { background-color: #f39c12 !important; }
+        .bg-red { background-color: #dd4b39 !important; }
+        .small-box { position: relative; display: block; border-radius: 2px; margin-bottom: 20px; color: #fff; overflow: hidden; }
+        .small-box .inner { padding: 15px 20px; }
+        .small-box .icon { position: absolute; top: 0; right: 10px; font-size: 65px; color: rgba(0,0,0,0.15); }
+        .small-box .footer { position: relative; text-align: center; padding: 3px 0; background: rgba(0,0,0,0.1); display: block; z-index: 10; font-size: 12px; text-decoration: none; }
+    </style>
+</head>
+<body class="bg-[#ecf0f5]">
+    <div id="admin-root"></div>
+    <script type="text/babel" src="/static/js/app_admin.js"></script>
+</body>
+</html>

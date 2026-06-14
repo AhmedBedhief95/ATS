@@ -1,0 +1,43 @@
+# render.yaml – Blueprint for ATS+ deployment on Render
+
+services:
+  - type: web
+    name: ats-plus
+    runtime: python
+    repo: https://gitlab.com/ahmedbedhief-group/ATS/-/tree/salary&job  # ⚠️ Replace with your actual GitLab repo URL
+    branch: salary&job                                        # Or 'master', 'prod', etc.
+    region: frankfurt                                   # Choose region closest to you
+    plan: free                                          # Free tier (or 'standard' for more resources)
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: DB_HOST
+        sync: false           # You'll set this manually in Render dashboard
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_NAME
+        sync: false
+      - key: DB_PORT
+        value: "5432"
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: CPI_CLIENT_ID
+        sync: false
+      - key: CPI_CLIENT_SECRET
+        sync: false
+      - key: CPI_BASE_URL
+        sync: false
+      - key: APP_HOST
+        value: "0.0.0.0"
+      - key: APP_PORT
+        value: $PORT
+    # Optional: attach a managed PostgreSQL database (if you don't use Supabase)
+    # databases:
+    #   - name: ats-db
+    #     databaseName: ats_plus
+    #     user: ats_user

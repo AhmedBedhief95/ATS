@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HR | Database View</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="bg-slate-50">
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        const Dashboard = () => {
+            const [data, setData] = useState([]);
+            useEffect(() => { fetch("/api/candidates").then(r => r.json()).then(setData); }, []);
+
+            return (
+                <div className="min-h-screen">
+                    <nav className="bg-white border-b p-6 flex justify-between items-center shadow-sm">
+                        <h1 className="text-2xl font-black text-indigo-600 tracking-tighter cursor-pointer" onClick={()=>window.location.reload()}>UPLEE</h1>
+                        <button onClick={()=>window.location.href='/'} className="text-xs font-bold text-slate-400 hover:text-red-500 transition-colors">LOGOUT</button>
+                    </nav>
+                    <main className="p-10 max-w-6xl mx-auto">
+                        <div className="flex justify-between items-end mb-10">
+                            <div>
+                                <h2 className="text-4xl font-bold text-slate-800">Candidate Pool</h2>
+                                <p className="text-slate-400 mt-1">Direct view of Supabase database records</p>
+                            </div>
+                            <button onClick={()=>window.location.href='/ats_main.html'} className="bg-indigo-600 text-white px-8 py-4 rounded-2xl font-bold shadow-lg shadow-indigo-100 hover:scale-105 transition-all">
+                                + Analyze New CVs
+                            </button>
+                        </div>
+                        <div className="bg-white rounded-[40px] shadow-sm border border-slate-200 overflow-hidden">
+                            <table className="w-full text-left">
+                                <thead className="bg-slate-50 border-b border-slate-100">
+                                    <tr className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                                        <th className="px-8 py-5">Name</th>
+                                        <th className="px-8 py-5">Current Job</th>
+                                        <th className="px-8 py-5">Exp.</th>
+                                        <th className="px-8 py-5">Target</th>
+                                        <th className="px-8 py-5">Score</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="divide-y divide-slate-50">
+                                    {data.map((c, i) => (
+                                        <tr key={i} className="hover:bg-indigo-50/30 transition-colors">
+                                            <td className="px-8 py-5 font-bold text-slate-700">{c.name}</td>
+                                            <td className="px-8 py-5 text-slate-500 text-sm">{c.job}</td>
+                                            <td className="px-8 py-5 text-slate-400 text-sm">{c.exp}</td>
+                                            <td className="px-8 py-5 text-indigo-500 font-medium text-sm">{c.target_job}</td>
+                                            <td className="px-8 py-5"><span className="bg-indigo-50 text-indigo-700 px-3 py-1 rounded-lg font-black text-xs">{c.score}%</span></td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </main>
+                </div>
+            );
+        };
+        ReactDOM.createRoot(document.getElementById('root')).render(<Dashboard />);
+    </script>
+</body>
+</html>
